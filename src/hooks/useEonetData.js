@@ -13,7 +13,7 @@ export const useEonetCategories = () => {
 
       try {
         const response = await eonetAPI.getCategories();
-        setCategories(response.data);
+        setCategories(response);
       } catch (err) {
         setError(err.message || 'Failed to fetch EONET categories');
         console.error('EONET categories fetch error:', err);
@@ -40,7 +40,7 @@ export const useEonetEvents = (params = {}) => {
 
       try {
         const response = await eonetAPI.getEvents(params);
-        setEvents(response.data);
+        setEvents(response);
       } catch (err) {
         setError(err.message || 'Failed to fetch EONET events');
         console.error('EONET events fetch error:', err);
@@ -80,4 +80,63 @@ export const useEonetEventsGeoJSON = (params = {}) => {
   }, [JSON.stringify(params)]);
 
   return { geoJSON, loading, error };
+};
+
+export const useEonetEventsByCategory = (categoryId, params = {}) => {
+  const [events, setEvents] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    if (!categoryId) return;
+
+    const fetchEvents = async () => {
+      setLoading(true);
+      setError(null);
+
+      try {
+        const response = await eonetAPI.getEventsByCategory(categoryId, params);
+        setEvents(response);
+      } catch (err) {
+        setError(err.message || 'Failed to fetch category events');
+        console.error('EONET category events fetch error:', err);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchEvents();
+  }, [categoryId, JSON.stringify(params)]);
+
+  return { events, loading, error };
+};
+
+export const useEonetRegionalEvents = (params = {}) => {
+  const [events, setEvents] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    // Only fetch if we have bbox or user location
+    if (!params.bbox && (!params.userLat || !params.userLon)) return;
+
+    const fetchEvents = async () => {
+      setLoading(true);
+      setError(null);
+
+      try {
+        const response = await eonetAPI.getRegionalEvents(params);
+        setEvents(response);
+      } catch (err) {
+        setError(err.message || 'Failed to fetch regional events');
+        console.error('EONET regional events fetch error:', err);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchEvents();
+  }, [JSON.stringify(params)]);
+
+  return { events, loading, error };
 };

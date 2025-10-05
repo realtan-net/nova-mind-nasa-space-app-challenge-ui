@@ -21,10 +21,8 @@ export const eonetAPI = {
     return api.get(`/eonet/events/category/${categoryId}`, { params });
   },
 
-  // Get regional events
-  getRegionalEvents: async (latitude, longitude, radius, params = {}) => {
-    return api.get('/eonet/events/regional', {
-      params: { latitude, longitude, radius, ...params }
-    });
+  // Get regional events with bounding box
+  getRegionalEvents: async (params = {}) => {
+    return api.get('/eonet/events/regional', { params });
   }
 };
