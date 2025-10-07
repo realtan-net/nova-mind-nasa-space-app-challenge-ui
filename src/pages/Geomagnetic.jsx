@@ -219,7 +219,7 @@ const Geomagnetic = () => {
         label: `${day.date} ${String(index * 3).padStart(2, '0')}:00`
       }))
     );
-
+/*Merhabalar bu yorum satırıdır.*/ 
     return (
       <Box>
         {/* Summary Cards */}
