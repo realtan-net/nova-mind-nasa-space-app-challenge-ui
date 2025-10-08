@@ -2,7 +2,7 @@ import { Container, Typography, Box, Paper, TextField, Grid, Card, CardContent, 
 import LocationInput from '../components/common/LocationInput';
 import { useState } from 'react';
 import { useLocation } from '../context/LocationContext';
-import { formatAPIDate, getCurrentDate, parseHourlyTimestamp } from '../utils/dateFormatter';
+import { formatAPIDate, formatAPIDateStandard, getCurrentDate, parseHourlyTimestamp, getDateDaysFromNow } from '../utils/dateFormatter';
 import { useWeatherData } from '../hooks/useWeatherData';
 import LoadingSpinner from '../components/common/LoadingSpinner';
 import ErrorMessage from '../components/common/ErrorMessage';
@@ -13,7 +13,8 @@ import { format } from 'date-fns';
 
 const Weather = () => {
   const { location } = useLocation();
-  const [selectedDate, setSelectedDate] = useState(formatAPIDate(getCurrentDate()));
+  // Set default date to tomorrow (YYYY-MM-DD format for HTML date input)
+  const [selectedDate, setSelectedDate] = useState(formatAPIDateStandard(getDateDaysFromNow(1)));
   const [activeTab, setActiveTab] = useState(0);
 
   const { data, loading, error } = useWeatherData(
@@ -213,7 +214,6 @@ const Weather = () => {
           type="date"
           value={selectedDate}
           onChange={(e) => setSelectedDate(e.target.value)}
-          label="Date"
           InputLabelProps={{ shrink: true }}
           fullWidth
           sx={{ maxWidth: 300 }}
