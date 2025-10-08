@@ -15,7 +15,7 @@ export const useTheme = () => {
 export const ThemeProvider = ({ children }) => {
   const [mode, setMode] = useState(() => {
     const saved = localStorage.getItem('themeMode');
-    return saved || 'dark';
+    return saved || 'light';
   });
 
   useEffect(() => {
