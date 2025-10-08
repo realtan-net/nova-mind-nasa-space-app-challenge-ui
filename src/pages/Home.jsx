@@ -38,56 +38,6 @@ const Home = () => {
 
   return (
     <Container maxWidth="xl" sx={{ py: 4 }}>
-      {/* Hero Section with Bright Gradient Background */}
-      <Box 
-        sx={{ 
-          mb: 6,
-          p: 5,
-          borderRadius: 4,
-          background: 'linear-gradient(135deg, #00E0FF 0%, #3B82F6 50%, #7C3AED 100%)',
-          color: 'white',
-          position: 'relative',
-          overflow: 'hidden',
-          boxShadow: '0 20px 60px rgba(0, 224, 255, 0.3)',
-          '&::before': {
-            content: '""',
-            position: 'absolute',
-            top: 0,
-            left: 0,
-            right: 0,
-            bottom: 0,
-            background: 'url("data:image/svg+xml,%3Csvg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg"%3E%3Cg fill="none" fill-rule="evenodd"%3E%3Cg fill="%23ffffff" fill-opacity="0.1"%3E%3Cpath d="M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z"/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")',
-            animation: 'float 20s ease-in-out infinite',
-          },
-          '@keyframes float': {
-            '0%, 100%': { transform: 'translateY(0px)' },
-            '50%': { transform: 'translateY(-20px)' },
-          },
-        }}
-      >
-        <Box sx={{ position: 'relative', zIndex: 1 }}>
-          <Typography 
-            variant="h2" 
-            component="h1" 
-            gutterBottom 
-            fontWeight={900} 
-            sx={{ 
-              textShadow: '0 4px 20px rgba(0, 0, 0, 0.3)',
-              letterSpacing: '-0.02em',
-            }}
-          >
-            Welcome to Nova Mind
-          </Typography>
-          <Typography variant="h5" sx={{ mb: 3, opacity: 0.95, fontWeight: 400, letterSpacing: '0.01em' }}>
-            Your Gateway to Environmental & Space Data
-          </Typography>
-          <Typography variant="body1" sx={{ maxWidth: 800, opacity: 0.95, lineHeight: 1.8, fontSize: '1.1rem' }}>
-            Explore real-time weather patterns, track near-Earth asteroids, monitor geomagnetic activity, 
-            and stay informed about natural disasters worldwide. All powered by NASA and environmental data APIs.
-          </Typography>
-        </Box>
-      </Box>
-
       {/* Feature Highlights */}
       <Grid container spacing={4} sx={{ mb: 6 }}>
         <Grid item xs={12}>
