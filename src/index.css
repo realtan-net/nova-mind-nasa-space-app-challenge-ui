@@ -11,6 +11,9 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background: linear-gradient(135deg, #F0F4FF 0%, #E0EBFF 100%);
+  background-attachment: fixed;
+  min-height: 100vh;
 }
 
 code {
@@ -22,6 +25,7 @@ code {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  background: transparent;
 }
 
 /* Leaflet map fixes */

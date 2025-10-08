@@ -66,36 +66,36 @@ export const ThemeProvider = ({ children }) => {
                 },
               }
             : {
-                // Light mode colors
+                // Light mode colors - Bright, modern, space-inspired theme
                 primary: {
-                  main: '#1e3a8a',
-                  light: '#3b82f6',
-                  dark: '#1e40af',
+                  main: '#00E0FF', // Turquoise
+                  light: '#33E8FF',
+                  dark: '#00B8D4',
                 },
                 secondary: {
-                  main: '#059669',
-                  light: '#10b981',
-                  dark: '#047857',
+                  main: '#3B82F6', // Bright blue
+                  light: '#60A5FA',
+                  dark: '#2563EB',
                 },
                 background: {
-                  default: '#f8fafc',
-                  paper: '#ffffff',
+                  default: 'linear-gradient(135deg, #F0F4FF 0%, #E0EBFF 100%)',
+                  paper: 'rgba(255, 255, 255, 0.75)',
                 },
                 text: {
-                  primary: '#0f172a',
-                  secondary: '#475569',
+                  primary: '#1F2937', // Dark gray for titles
+                  secondary: '#4B5563', // Medium gray for descriptions
                 },
                 error: {
-                  main: '#dc2626',
+                  main: '#EF4444',
                 },
                 warning: {
-                  main: '#f59e0b',
+                  main: '#F59E0B',
                 },
                 info: {
-                  main: '#0284c7',
+                  main: '#00E0FF',
                 },
                 success: {
-                  main: '#059669',
+                  main: '#34D399', // Mint green
                 },
               }),
         },

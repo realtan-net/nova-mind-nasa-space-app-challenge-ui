@@ -38,16 +38,17 @@ const Home = () => {
 
   return (
     <Container maxWidth="xl" sx={{ py: 4 }}>
-      {/* Hero Section with Gradient Background */}
+      {/* Hero Section with Bright Gradient Background */}
       <Box 
         sx={{ 
           mb: 6,
-          p: 4,
-          borderRadius: 3,
-          background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+          p: 5,
+          borderRadius: 4,
+          background: 'linear-gradient(135deg, #00E0FF 0%, #3B82F6 50%, #7C3AED 100%)',
           color: 'white',
           position: 'relative',
           overflow: 'hidden',
+          boxShadow: '0 20px 60px rgba(0, 224, 255, 0.3)',
           '&::before': {
             content: '""',
             position: 'absolute',
@@ -55,18 +56,32 @@ const Home = () => {
             left: 0,
             right: 0,
             bottom: 0,
-            background: 'url("data:image/svg+xml,%3Csvg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg"%3E%3Cg fill="none" fill-rule="evenodd"%3E%3Cg fill="%23ffffff" fill-opacity="0.05"%3E%3Cpath d="M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z"/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")',
+            background: 'url("data:image/svg+xml,%3Csvg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg"%3E%3Cg fill="none" fill-rule="evenodd"%3E%3Cg fill="%23ffffff" fill-opacity="0.1"%3E%3Cpath d="M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z"/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")',
+            animation: 'float 20s ease-in-out infinite',
+          },
+          '@keyframes float': {
+            '0%, 100%': { transform: 'translateY(0px)' },
+            '50%': { transform: 'translateY(-20px)' },
           },
         }}
       >
         <Box sx={{ position: 'relative', zIndex: 1 }}>
-          <Typography variant="h2" component="h1" gutterBottom fontWeight={800} sx={{ textShadow: '2px 2px 4px rgba(0,0,0,0.2)' }}>
+          <Typography 
+            variant="h2" 
+            component="h1" 
+            gutterBottom 
+            fontWeight={900} 
+            sx={{ 
+              textShadow: '0 4px 20px rgba(0, 0, 0, 0.3)',
+              letterSpacing: '-0.02em',
+            }}
+          >
             Welcome to Nova Mind
           </Typography>
-          <Typography variant="h5" sx={{ mb: 3, opacity: 0.95, fontWeight: 300 }}>
+          <Typography variant="h5" sx={{ mb: 3, opacity: 0.95, fontWeight: 400, letterSpacing: '0.01em' }}>
             Your Gateway to Environmental & Space Data
           </Typography>
-          <Typography variant="body1" sx={{ maxWidth: 800, opacity: 0.9, lineHeight: 1.7 }}>
+          <Typography variant="body1" sx={{ maxWidth: 800, opacity: 0.95, lineHeight: 1.8, fontSize: '1.1rem' }}>
             Explore real-time weather patterns, track near-Earth asteroids, monitor geomagnetic activity, 
             and stay informed about natural disasters worldwide. All powered by NASA and environmental data APIs.
           </Typography>
@@ -74,9 +89,18 @@ const Home = () => {
       </Box>
 
       {/* Feature Highlights */}
-      <Grid container spacing={3} sx={{ mb: 5 }}>
+      <Grid container spacing={4} sx={{ mb: 6 }}>
         <Grid item xs={12}>
-          <Typography variant="h4" gutterBottom fontWeight={700} sx={{ mb: 3 }}>
+          <Typography 
+            variant="h4" 
+            gutterBottom 
+            fontWeight={800} 
+            sx={{ 
+              mb: 3, 
+              color: '#1F2937',
+              letterSpacing: '-0.01em',
+            }}
+          >
             Platform Features
           </Typography>
         </Grid>
@@ -85,23 +109,33 @@ const Home = () => {
           <Card 
             sx={{ 
               height: '100%', 
-              transition: 'transform 0.2s, box-shadow 0.2s',
+              background: 'rgba(255, 255, 255, 0.8)',
+              backdropFilter: 'blur(10px)',
+              borderRadius: 3,
+              border: '1px solid rgba(255, 255, 255, 0.3)',
+              boxShadow: '0 8px 32px rgba(0, 224, 255, 0.15)',
+              transition: 'all 0.3s ease',
               '&:hover': { 
-                transform: 'translateY(-4px)',
-                boxShadow: 6,
+                transform: 'translateY(-8px)',
+                boxShadow: '0 16px 48px rgba(59, 130, 246, 0.25)',
               }
             }}
           >
-            <CardContent>
+            <CardContent sx={{ p: 3 }}>
               <Box sx={{ display: 'flex', alignItems: 'center', gap: 2, mb: 2 }}>
-                <Avatar sx={{ bgcolor: '#3b82f6', width: 56, height: 56 }}>
-                  <FaCloudSun size={28} />
+                <Avatar sx={{ 
+                  background: 'linear-gradient(135deg, #3B82F6 0%, #00E0FF 100%)',
+                  width: 64, 
+                  height: 64,
+                  boxShadow: '0 4px 20px rgba(59, 130, 246, 0.4)',
+                }}>
+                  <FaCloudSun size={32} />
                 </Avatar>
-                <Typography variant="h6" fontWeight={600}>
+                <Typography variant="h6" fontWeight={700} color="#1F2937">
                   Weather Monitoring
                 </Typography>
               </Box>
-              <Typography variant="body2" color="text.secondary">
+              <Typography variant="body2" sx={{ color: '#4B5563', lineHeight: 1.7 }}>
                 Access detailed hourly weather data including temperature, humidity, wind speed, and solar irradiance 
                 for any location worldwide. Get future weather forecasts based on historical data patterns using NASA POWER API.
               </Typography>
@@ -113,23 +147,33 @@ const Home = () => {
           <Card 
             sx={{ 
               height: '100%',
-              transition: 'transform 0.2s, box-shadow 0.2s',
+              background: 'rgba(255, 255, 255, 0.8)',
+              backdropFilter: 'blur(10px)',
+              borderRadius: 3,
+              border: '1px solid rgba(255, 255, 255, 0.3)',
+              boxShadow: '0 8px 32px rgba(124, 58, 237, 0.15)',
+              transition: 'all 0.3s ease',
               '&:hover': { 
-                transform: 'translateY(-4px)',
-                boxShadow: 6,
+                transform: 'translateY(-8px)',
+                boxShadow: '0 16px 48px rgba(124, 58, 237, 0.25)',
               }
             }}
           >
-            <CardContent>
+            <CardContent sx={{ p: 3 }}>
               <Box sx={{ display: 'flex', alignItems: 'center', gap: 2, mb: 2 }}>
-                <Avatar sx={{ bgcolor: '#8b5cf6', width: 56, height: 56 }}>
-                  <FaMeteor size={28} />
+                <Avatar sx={{ 
+                  background: 'linear-gradient(135deg, #7C3AED 0%, #EC4899 100%)',
+                  width: 64, 
+                  height: 64,
+                  boxShadow: '0 4px 20px rgba(124, 58, 237, 0.4)',
+                }}>
+                  <FaMeteor size={32} />
                 </Avatar>
-                <Typography variant="h6" fontWeight={600}>
+                <Typography variant="h6" fontWeight={700} color="#1F2937">
                   Asteroid Tracking
                 </Typography>
               </Box>
-              <Typography variant="body2" color="text.secondary">
+              <Typography variant="body2" sx={{ color: '#4B5563', lineHeight: 1.7 }}>
                 Track near-Earth objects with comprehensive data on asteroid size, velocity, and closest approach 
                 distances. Identify potentially hazardous asteroids.
               </Typography>
@@ -141,23 +185,33 @@ const Home = () => {
           <Card 
             sx={{ 
               height: '100%',
-              transition: 'transform 0.2s, box-shadow 0.2s',
+              background: 'rgba(255, 255, 255, 0.8)',
+              backdropFilter: 'blur(10px)',
+              borderRadius: 3,
+              border: '1px solid rgba(255, 255, 255, 0.3)',
+              boxShadow: '0 8px 32px rgba(52, 211, 153, 0.15)',
+              transition: 'all 0.3s ease',
               '&:hover': { 
-                transform: 'translateY(-4px)',
-                boxShadow: 6,
+                transform: 'translateY(-8px)',
+                boxShadow: '0 16px 48px rgba(52, 211, 153, 0.25)',
               }
             }}
           >
-            <CardContent>
+            <CardContent sx={{ p: 3 }}>
               <Box sx={{ display: 'flex', alignItems: 'center', gap: 2, mb: 2 }}>
-                <Avatar sx={{ bgcolor: '#10b981', width: 56, height: 56 }}>
-                  <FaGlobeAmericas size={28} />
+                <Avatar sx={{ 
+                  background: 'linear-gradient(135deg, #34D399 0%, #10B981 100%)',
+                  width: 64, 
+                  height: 64,
+                  boxShadow: '0 4px 20px rgba(52, 211, 153, 0.4)',
+                }}>
+                  <FaGlobeAmericas size={32} />
                 </Avatar>
-                <Typography variant="h6" fontWeight={600}>
+                <Typography variant="h6" fontWeight={700} color="#1F2937">
                   Environmental Data
                 </Typography>
               </Box>
-              <Typography variant="body2" color="text.secondary">
+              <Typography variant="body2" sx={{ color: '#4B5563', lineHeight: 1.7 }}>
                 Monitor air quality, geomagnetic storms, and natural disasters in real-time. Stay informed about 
                 wildfires, severe weather, and other critical environmental events.
               </Typography>
@@ -180,19 +234,21 @@ const Home = () => {
         {/* Near-Earth Objects with Real Data */}
         <Grid item xs={12} md={6}>
           <Paper 
-            elevation={3} 
+            elevation={0}
             sx={{ 
-              p: 3, 
+              p: 4, 
               height: '100%',
-              background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+              background: 'linear-gradient(135deg, #00E0FF 0%, #3B82F6 50%, #7C3AED 100%)',
+              borderRadius: 3,
               color: 'white',
               position: 'relative',
-              overflow: 'hidden'
+              overflow: 'hidden',
+              boxShadow: '0 12px 40px rgba(0, 224, 255, 0.25)',
             }}
           >
             <Box sx={{ display: 'flex', alignItems: 'center', gap: 2, mb: 3 }}>
-              <FaMeteor size={32} />
-              <Typography variant="h5" fontWeight={700}>
+              <FaMeteor size={36} style={{ filter: 'drop-shadow(0 2px 8px rgba(0,0,0,0.3))' }} />
+              <Typography variant="h5" fontWeight={800} sx={{ textShadow: '0 2px 8px rgba(0,0,0,0.2)' }}>
                 Near-Earth Objects
               </Typography>
             </Box>
@@ -212,51 +268,130 @@ const Home = () => {
                   const isHazardous = asteroid.isPotentiallyHazardous;
                   
                   return (
-                    <Card key={asteroid.id} sx={{ mb: 2, bgcolor: 'rgba(255,255,255,0.95)' }}>
-                      <CardContent>
-                        <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'start', mb: 1 }}>
-                          <Typography variant="subtitle1" fontWeight={600} color="text.primary">
+                    <Card 
+                      key={asteroid.id} 
+                      sx={{ 
+                        mb: 2, 
+                        background: (theme) => 
+                          theme.palette.mode === 'light' 
+                            ? 'rgba(255, 255, 255, 0.95)' 
+                            : 'rgba(30, 41, 59, 0.95)',
+                        backdropFilter: 'blur(10px)',
+                        borderRadius: 2,
+                        border: (theme) => 
+                          theme.palette.mode === 'light'
+                            ? '1px solid rgba(255, 255, 255, 0.3)'
+                            : '1px solid rgba(255, 255, 255, 0.1)',
+                        boxShadow: '0 4px 16px rgba(0, 0, 0, 0.1)',
+                      }}
+                    >
+                      <CardContent sx={{ p: 2.5 }}>
+                        <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'start', mb: 1.5 }}>
+                          <Typography 
+                            variant="subtitle1" 
+                            fontWeight={700} 
+                            sx={{ 
+                              color: (theme) => 
+                                theme.palette.mode === 'light' ? '#1F2937' : '#F1F5F9'
+                            }}
+                          >
                             {asteroid.name}
                           </Typography>
                           {isHazardous && (
                             <Chip 
                               label="Hazardous" 
                               size="small" 
-                              color="error"
-                              sx={{ fontWeight: 600 }}
+                              sx={{ 
+                                fontWeight: 700,
+                                background: 'linear-gradient(135deg, #EF4444 0%, #DC2626 100%)',
+                                color: 'white',
+                                boxShadow: '0 2px 8px rgba(239, 68, 68, 0.4)',
+                              }}
                             />
                           )}
                         </Box>
                         <Grid container spacing={1}>
                           <Grid item xs={6}>
-                            <Typography variant="caption" color="text.secondary">
+                            <Typography 
+                              variant="caption" 
+                              sx={{ 
+                                color: (theme) => 
+                                  theme.palette.mode === 'light' ? '#6B7280' : '#94A3B8'
+                              }}
+                            >
                               Distance
                             </Typography>
-                            <Typography variant="body2" fontWeight={600} color="text.primary">
+                            <Typography 
+                              variant="body2" 
+                              fontWeight={600} 
+                              sx={{ 
+                                color: (theme) => 
+                                  theme.palette.mode === 'light' ? '#1F2937' : '#F1F5F9'
+                              }}
+                            >
                               {formatDistance(distance)}
                             </Typography>
                           </Grid>
                           <Grid item xs={6}>
-                            <Typography variant="caption" color="text.secondary">
+                            <Typography 
+                              variant="caption" 
+                              sx={{ 
+                                color: (theme) => 
+                                  theme.palette.mode === 'light' ? '#6B7280' : '#94A3B8'
+                              }}
+                            >
                               Velocity
                             </Typography>
-                            <Typography variant="body2" fontWeight={600} color="text.primary">
+                            <Typography 
+                              variant="body2" 
+                              fontWeight={600} 
+                              sx={{ 
+                                color: (theme) => 
+                                  theme.palette.mode === 'light' ? '#1F2937' : '#F1F5F9'
+                              }}
+                            >
                               {velocity.toLocaleString(undefined, { maximumFractionDigits: 0 })} km/h
                             </Typography>
                           </Grid>
                           <Grid item xs={6}>
-                            <Typography variant="caption" color="text.secondary">
+                            <Typography 
+                              variant="caption" 
+                              sx={{ 
+                                color: (theme) => 
+                                  theme.palette.mode === 'light' ? '#6B7280' : '#94A3B8'
+                              }}
+                            >
                               Size (Est.)
                             </Typography>
-                            <Typography variant="body2" fontWeight={600} color="text.primary">
+                            <Typography 
+                              variant="body2" 
+                              fontWeight={600} 
+                              sx={{ 
+                                color: (theme) => 
+                                  theme.palette.mode === 'light' ? '#1F2937' : '#F1F5F9'
+                              }}
+                            >
                               {diameter?.min?.toFixed(3)} - {diameter?.max?.toFixed(3)} km
                             </Typography>
                           </Grid>
                           <Grid item xs={6}>
-                            <Typography variant="caption" color="text.secondary">
+                            <Typography 
+                              variant="caption" 
+                              sx={{ 
+                                color: (theme) => 
+                                  theme.palette.mode === 'light' ? '#6B7280' : '#94A3B8'
+                              }}
+                            >
                               Approach Date
                             </Typography>
-                            <Typography variant="body2" fontWeight={600} color="text.primary">
+                            <Typography 
+                              variant="body2" 
+                              fontWeight={600} 
+                              sx={{ 
+                                color: (theme) => 
+                                  theme.palette.mode === 'light' ? '#1F2937' : '#F1F5F9'
+                              }}
+                            >
                               {approach?.date || 'N/A'}
                             </Typography>
                           </Grid>
@@ -265,18 +400,26 @@ const Home = () => {
                     </Card>
                   );
                 })}
-                <Box sx={{ textAlign: 'center', mt: 2 }}>
+                <Box sx={{ textAlign: 'center', mt: 3 }}>
                   <Chip 
                     label="View All Asteroids →" 
                     clickable
                     component="a"
                     href="/asteroids"
                     sx={{ 
-                      bgcolor: 'rgba(255,255,255,0.2)',
+                      bgcolor: 'rgba(255, 255, 255, 0.25)',
+                      backdropFilter: 'blur(10px)',
                       color: 'white',
-                      fontWeight: 600,
+                      fontWeight: 700,
+                      fontSize: '0.9rem',
+                      px: 2,
+                      py: 2.5,
+                      border: '1px solid rgba(255, 255, 255, 0.3)',
+                      transition: 'all 0.3s ease',
                       '&:hover': {
-                        bgcolor: 'rgba(255,255,255,0.3)',
+                        bgcolor: 'rgba(255, 255, 255, 0.35)',
+                        transform: 'translateY(-2px)',
+                        boxShadow: '0 4px 16px rgba(255, 255, 255, 0.3)',
                       }
                     }}
                   />
