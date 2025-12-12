@@ -1,29 +1,33 @@
-import { createContext, useContext, useState, useEffect, useMemo } from 'react';
-import { ThemeProvider as MuiThemeProvider, createTheme } from '@mui/material/styles';
-import CssBaseline from '@mui/material/CssBaseline';
+import { createContext, useContext, useState, useEffect, useMemo } from "react";
+import {
+  ThemeProvider as MuiThemeProvider,
+  createTheme,
+} from "@mui/material/styles";
+import CssBaseline from "@mui/material/CssBaseline";
+import GlobalStyles from "@mui/material/GlobalStyles";
 
 const ThemeContext = createContext();
 
 export const useTheme = () => {
   const context = useContext(ThemeContext);
   if (!context) {
-    throw new Error('useTheme must be used within ThemeProvider');
+    throw new Error("useTheme must be used within ThemeProvider");
   }
   return context;
 };
 
 export const ThemeProvider = ({ children }) => {
   const [mode, setMode] = useState(() => {
-    const saved = localStorage.getItem('themeMode');
-    return saved || 'light';
+    const saved = localStorage.getItem("themeMode");
+    return saved || "light";
   });
 
   useEffect(() => {
-    localStorage.setItem('themeMode', mode);
+    localStorage.setItem("themeMode", mode);
   }, [mode]);
 
   const toggleTheme = () => {
-    setMode(prevMode => prevMode === 'light' ? 'dark' : 'light');
+    setMode((prevMode) => (prevMode === "light" ? "dark" : "light"));
   };
 
   const theme = useMemo(
@@ -31,113 +35,89 @@ export const ThemeProvider = ({ children }) => {
       createTheme({
         palette: {
           mode,
-          ...(mode === 'dark'
+          ...(mode === "dark"
             ? {
-                // Dark mode colors
+                // TRUE DARK MODE
                 primary: {
-                  main: '#3b82f6',
-                  light: '#60a5fa',
-                  dark: '#2563eb',
+                  main: "#90caf9",
                 },
                 secondary: {
-                  main: '#10b981',
-                  light: '#34d399',
-                  dark: '#059669',
+                  main: "#ce93d8",
                 },
                 background: {
-                  default: '#0f172a',
-                  paper: '#1e293b',
+                  default: "#000000", // Pure Black
+                  paper: "#121212", // Dark Charcoal for Cards
                 },
                 text: {
-                  primary: '#f1f5f9',
-                  secondary: '#cbd5e1',
+                  primary: "#ffffff", // Pure White
+                  secondary: "#e0e0e0", // Ultra-Bright Silver (Fixed visibility)
                 },
-                error: {
-                  main: '#ef4444',
-                },
-                warning: {
-                  main: '#f59e0b',
-                },
-                info: {
-                  main: '#06b6d4',
-                },
-                success: {
-                  main: '#10b981',
-                },
+                divider: "#333333",
               }
             : {
-                // Light mode colors - Bright, modern, space-inspired theme
+                // LIGHT MODE
                 primary: {
-                  main: '#00E0FF', // Turquoise
-                  light: '#33E8FF',
-                  dark: '#00B8D4',
+                  main: "#00E0FF",
+                  light: "#33E8FF",
+                  dark: "#00B8D4",
                 },
                 secondary: {
-                  main: '#3B82F6', // Bright blue
-                  light: '#60A5FA',
-                  dark: '#2563EB',
+                  main: "#3B82F6",
                 },
                 background: {
-                  default: 'linear-gradient(135deg, #F0F4FF 0%, #E0EBFF 100%)',
-                  paper: 'rgba(255, 255, 255, 0.75)',
+                  default: "#F0F4FF",
+                  paper: "rgba(255, 255, 255, 0.8)",
                 },
                 text: {
-                  primary: '#1F2937', // Dark gray for titles
-                  secondary: '#4B5563', // Medium gray for descriptions
-                },
-                error: {
-                  main: '#EF4444',
-                },
-                warning: {
-                  main: '#F59E0B',
-                },
-                info: {
-                  main: '#00E0FF',
-                },
-                success: {
-                  main: '#34D399', // Mint green
+                  primary: "#1F2937",
+                  secondary: "#4B5563",
                 },
               }),
         },
         typography: {
           fontFamily: '"Inter", "Roboto", "Helvetica", "Arial", sans-serif',
-          h1: {
-            fontWeight: 700,
+          allVariants: {
+            color: mode === "dark" ? "#ffffff" : "#1F2937",
           },
-          h2: {
-            fontWeight: 600,
-          },
-          h3: {
-            fontWeight: 600,
-          },
-          h4: {
-            fontWeight: 600,
-          },
-          h5: {
-            fontWeight: 500,
-          },
-          h6: {
-            fontWeight: 500,
-          },
-        },
-        shape: {
-          borderRadius: 8,
         },
         components: {
-          MuiButton: {
+          MuiCssBaseline: {
+            styleOverrides: {
+              body: {
+                backgroundColor: mode === "dark" ? "#000000" : "#F0F4FF",
+                color: mode === "dark" ? "#ffffff" : "#1F2937",
+              },
+            },
+          },
+          // FORCE HEADERS TO BE WHITE (Fixes "Platform Features" visibility)
+          MuiTypography: {
             styleOverrides: {
               root: {
-                textTransform: 'none',
-                fontWeight: 500,
+                "&.MuiTypography-colorTextSecondary": {
+                  color: mode === "dark" ? "#e0e0e0" : undefined,
+                },
               },
+              h1: { color: mode === "dark" ? "#ffffff" : undefined },
+              h2: { color: mode === "dark" ? "#ffffff" : undefined },
+              h3: { color: mode === "dark" ? "#ffffff" : undefined },
+              h4: { color: mode === "dark" ? "#ffffff" : undefined },
+              h5: { color: mode === "dark" ? "#ffffff" : undefined },
+              h6: { color: mode === "dark" ? "#ffffff" : undefined },
             },
           },
           MuiCard: {
             styleOverrides: {
               root: {
-                boxShadow: mode === 'dark' 
-                  ? '0 4px 6px -1px rgba(0, 0, 0, 0.3), 0 2px 4px -1px rgba(0, 0, 0, 0.2)'
-                  : '0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)',
+                backgroundColor: mode === "dark" ? "#121212" : "#ffffff",
+                border: mode === "dark" ? "1px solid #333333" : "none",
+              },
+            },
+          },
+          MuiPaper: {
+            styleOverrides: {
+              root: {
+                backgroundColor: mode === "dark" ? "#121212" : "#ffffff",
+                color: mode === "dark" ? "#ffffff" : "inherit",
               },
             },
           },
@@ -146,15 +126,25 @@ export const ThemeProvider = ({ children }) => {
     [mode]
   );
 
-  const value = {
-    mode,
-    toggleTheme,
-  };
+  const value = { mode, toggleTheme };
 
   return (
     <ThemeContext.Provider value={value}>
       <MuiThemeProvider theme={theme}>
         <CssBaseline />
+        <GlobalStyles
+          styles={{
+            "html, body, #root": {
+              backgroundColor:
+                mode === "dark" ? "#000000 !important" : "#F0F4FF",
+              color: mode === "dark" ? "#ffffff" : "#1F2937",
+            },
+            // Fallback: If a text is still dark, this catches it
+            ".MuiTypography-root": {
+              color: mode === "dark" ? "#ffffff" : undefined,
+            },
+          }}
+        />
         {children}
       </MuiThemeProvider>
     </ThemeContext.Provider>
