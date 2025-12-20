@@ -21,6 +21,8 @@ import {
 const Asteroids = () => {
   const [startDate, setStartDate] = useState(formatAPIDateStandard(getCurrentDate()));
   const [endDate, setEndDate] = useState(formatAPIDateStandard(getDateDaysAgo(-1)));
+  const [searchTerm, setSearchTerm] = useState('');
+  const [sortBy, setSortBy] = useState('none');
 
   const { asteroids, loading, error } = useAsteroidFeed(startDate, endDate);
 
@@ -288,6 +290,27 @@ const Asteroids = () => {
     );
   };
 
+const processedAsteroids = asteroids?.data?.asteroidsByDate
+    ? Object.entries(asteroids.data.asteroidsByDate).reduce((acc, [date, dayAsteroids]) => {
+        let results = dayAsteroids.filter(asteroid =>
+            asteroid.name.toLowerCase().includes(searchTerm.toLowerCase())
+        );
+
+        if (sortBy === 'name') {
+            results.sort((a, b) => a.name.localeCompare(b.name));
+        } else if (sortBy === 'size') {
+            results.sort((a, b) => b.estimatedDiameter.kilometers.max - a.estimatedDiameter.kilometers.max);
+        } else if (sortBy === 'velocity') {
+            results.sort((a, b) => b.closeApproachData.relativeVelocity.kilometersPerHour - a.closeApproachData.relativeVelocity.kilometersPerHour);
+        }
+
+        if (results.length > 0) {
+            acc[date] = results;
+        }
+        return acc;
+    }, {})
+    : {};
+
   const renderAsteroidList = () => {
     if (!asteroids || !asteroids.data || !asteroids.data.asteroidsByDate) return null;
 
@@ -298,7 +321,7 @@ const Asteroids = () => {
           Asteroid Details ({asteroids.data.elementCount} objects)
         </Typography>
 
-        {Object.entries(asteroids.data.asteroidsByDate).map(([date, dayAsteroids]) => (
+          {Object.entries(processedAsteroids).map(([date, dayAsteroids]) => (
           <Box key={date} sx={{ mb: 3 }}>
             <Typography variant="subtitle1" fontWeight={600} sx={{ mb: 1, color: 'primary.main' }}>
               📅 {format(parseISO(date), 'MMMM dd, yyyy')} ({dayAsteroids.length} asteroids)
@@ -524,6 +547,33 @@ const Asteroids = () => {
               InputLabelProps={{ shrink: true }}
             />
           </Grid>
+          <Grid item xs={12}>
+              <TextField
+                  fullWidth
+                  label="Asteroid İsmine Göre Filtrele"
+                  variant="outlined"
+                  size="small"
+                  value={searchTerm}
+                  onChange={(e) => setSearchTerm(e.target.value)}
+                  placeholder="Örn: (2024 BX)..."
+              />
+          </Grid>
+            <Grid item xs={12} sm={4}>
+                <TextField
+                    select
+                    fullWidth
+                    label="Sırala"
+                    size="small"
+                    value={sortBy}
+                    onChange={(e) => setSortBy(e.target.value)}
+                    SelectProps={{ native: true }}
+                >
+                    <option value="none">Varsayılan</option>
+                    <option value="name">İsim (A-Z)</option>
+                    <option value="size">Büyüklük (Azalan)</option>
+                    <option value="velocity">Hız (Azalan)</option>
+                </TextField>
+            </Grid>
           <Grid item xs={12} sm={2}>
             <Typography variant="caption" color="text.secondary">
               {asteroids?.data?.elementCount || 0} asteroids
