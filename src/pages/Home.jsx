@@ -5,11 +5,14 @@ import {
   Typography,
   Card,
   CardContent,
+  CardActionArea,
   Paper,
   Chip,
   Avatar,
   useTheme,
+  Skeleton,
 } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 import APODCard from "../components/dashboard/APODCard";
 import EventsAlert from "../components/dashboard/EventsAlert";
 import { useAsteroidFeed } from "../hooks/useAsteroidData";
@@ -18,11 +21,20 @@ import {
   getCurrentDate,
   getDateDaysAgo,
 } from "../utils/dateFormatter";
-import { FaCloudSun, FaGlobeAmericas, FaMeteor, FaSatellite } from "react-icons/fa";
+import {
+  FaCloudSun,
+  FaGlobeAmericas,
+  FaMeteor,
+  FaSatellite,
+  FaWind,
+  FaBolt,
+  FaSun
+} from "react-icons/fa";
 
 const Home = () => {
-  const theme = useTheme(); // Access the theme to check if we are in dark mode
+  const theme = useTheme();
   const isDark = theme.palette.mode === "dark";
+  const navigate = useNavigate();
 
   // Fetch asteroid data (today to tomorrow)
   const startDate = formatAPIDateStandard(getCurrentDate());
@@ -143,7 +155,7 @@ const Home = () => {
               textTransform: "uppercase",
             }}
           >
-            Connecting Earth, Space, and Data
+            Live Environmental & Space Data Platform
           </Typography>
           <Typography
             variant="body1"
@@ -157,11 +169,108 @@ const Home = () => {
             Your mission control for environmental monitoring, space weather tracking,
             and real-time celestial data powered by NASA APIs.
           </Typography>
+
+          {/* Animated Stat Cards */}
+          <Grid container spacing={2} sx={{ mt: 4, maxWidth: 800, mx: "auto" }}>
+            <Grid item xs={6} sm={3}>
+              <Box
+                sx={{
+                  background: "rgba(255, 255, 255, 0.1)",
+                  backdropFilter: "blur(10px)",
+                  borderRadius: 2,
+                  p: 2,
+                  textAlign: "center",
+                  border: "1px solid rgba(255, 255, 255, 0.2)",
+                  animation: "pulse 2s ease-in-out infinite",
+                  "@keyframes pulse": {
+                    "0%, 100%": { opacity: 1 },
+                    "50%": { opacity: 0.8 },
+                  },
+                }}
+              >
+                <Typography variant="h4" fontWeight={700} sx={{ color: "white" }}>
+                  6+
+                </Typography>
+                <Typography variant="caption" sx={{ color: "rgba(255,255,255,0.8)" }}>
+                  NASA APIs
+                </Typography>
+              </Box>
+            </Grid>
+            <Grid item xs={6} sm={3}>
+              <Box
+                sx={{
+                  background: "rgba(255, 255, 255, 0.1)",
+                  backdropFilter: "blur(10px)",
+                  borderRadius: 2,
+                  p: 2,
+                  textAlign: "center",
+                  border: "1px solid rgba(255, 255, 255, 0.2)",
+                }}
+              >
+                <Typography variant="h4" fontWeight={700} sx={{ color: "white" }}>
+                  24/7
+                </Typography>
+                <Typography variant="caption" sx={{ color: "rgba(255,255,255,0.8)" }}>
+                  Live Data
+                </Typography>
+              </Box>
+            </Grid>
+            <Grid item xs={6} sm={3}>
+              <Box
+                sx={{
+                  background: "rgba(255, 255, 255, 0.1)",
+                  backdropFilter: "blur(10px)",
+                  borderRadius: 2,
+                  p: 2,
+                  textAlign: "center",
+                  border: "1px solid rgba(255, 255, 255, 0.2)",
+                }}
+              >
+                <Typography variant="h4" fontWeight={700} sx={{ color: "white" }}>
+                  🌍
+                </Typography>
+                <Typography variant="caption" sx={{ color: "rgba(255,255,255,0.8)" }}>
+                  Global Coverage
+                </Typography>
+              </Box>
+            </Grid>
+            <Grid item xs={6} sm={3}>
+              <Box
+                sx={{
+                  background: "rgba(255, 255, 255, 0.1)",
+                  backdropFilter: "blur(10px)",
+                  borderRadius: 2,
+                  p: 2,
+                  textAlign: "center",
+                  border: "1px solid rgba(255, 255, 255, 0.2)",
+                }}
+              >
+                <Typography variant="h4" fontWeight={700} sx={{ color: "white" }}>
+                  🚀
+                </Typography>
+                <Typography variant="caption" sx={{ color: "rgba(255,255,255,0.8)" }}>
+                  Space Ready
+                </Typography>
+              </Box>
+            </Grid>
+          </Grid>
         </Box>
       </Box>
 
-      {/* Feature Highlights */}
-      <Grid container spacing={4} sx={{ mb: 6 }}>
+      {/* Dashboard Navigation Cards */}
+      <Typography
+        variant="h4"
+        gutterBottom
+        fontWeight={800}
+        sx={{
+          mb: 3,
+          color: "text.primary",
+          textAlign: "center",
+        }}
+      >
+        Explore Features
+      </Typography>
+      <Grid container spacing={3} sx={{ mb: 6 }}>
         <Grid item xs={12}>
           <Typography
             variant="h4"

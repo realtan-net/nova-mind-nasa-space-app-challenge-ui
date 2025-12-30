@@ -57,6 +57,10 @@ export const ThemeProvider = ({ children }) => {
                 secondary: "#B8C5D6", // Bright silver-blue for accessibility
               },
               divider: "rgba(124, 58, 237, 0.3)", // Subtle purple dividers
+              success: { main: "#10B981" },
+              warning: { main: "#F59E0B" },
+              error: { main: "#EF4444" },
+              info: { main: "#3B82F6" },
             }
             : {
               // LIGHT MODE
@@ -78,10 +82,30 @@ export const ThemeProvider = ({ children }) => {
               },
             }),
         },
+        shape: {
+          borderRadius: 12,
+        },
         typography: {
           fontFamily: '"Inter", "Roboto", "Helvetica", "Arial", sans-serif',
           allVariants: {
             color: mode === "dark" ? "#ffffff" : "#1F2937",
+          },
+          h1: { fontWeight: 800, letterSpacing: "-0.02em" },
+          h2: { fontWeight: 800, letterSpacing: "-0.02em" },
+          h3: { fontWeight: 700, letterSpacing: "-0.01em" },
+          h4: { fontWeight: 700, letterSpacing: "-0.01em" },
+          h5: { fontWeight: 600 },
+          h6: { fontWeight: 600 },
+        },
+        transitions: {
+          duration: {
+            shortest: 150,
+            shorter: 200,
+            short: 250,
+            standard: 300,
+            complex: 375,
+            enteringScreen: 225,
+            leavingScreen: 195,
           },
         },
         components: {
@@ -93,7 +117,6 @@ export const ThemeProvider = ({ children }) => {
               },
             },
           },
-          // FORCE HEADERS TO BE WHITE IN DARK MODE
           MuiTypography: {
             styleOverrides: {
               root: {
@@ -115,6 +138,7 @@ export const ThemeProvider = ({ children }) => {
                 backgroundColor: mode === "dark" ? "#111827" : "#ffffff",
                 border: mode === "dark" ? "1px solid rgba(124, 58, 237, 0.2)" : "none",
                 boxShadow: mode === "dark" ? "0 4px 20px rgba(124, 58, 237, 0.15)" : undefined,
+                transition: "all 0.3s ease",
               },
             },
           },
@@ -128,6 +152,11 @@ export const ThemeProvider = ({ children }) => {
           },
           MuiButton: {
             styleOverrides: {
+              root: {
+                textTransform: "none",
+                fontWeight: 600,
+                borderRadius: 8,
+              },
               containedPrimary: {
                 background: mode === "dark"
                   ? "linear-gradient(135deg, #7C3AED 0%, #00E0FF 100%)"
@@ -140,6 +169,53 @@ export const ThemeProvider = ({ children }) => {
                     ? "0 6px 20px rgba(124, 58, 237, 0.6)"
                     : undefined,
                 },
+              },
+            },
+          },
+          MuiTooltip: {
+            styleOverrides: {
+              tooltip: {
+                backgroundColor: mode === "dark" ? "#1F2937" : "#1F2937",
+                color: "#ffffff",
+                fontSize: "0.875rem",
+                padding: "8px 12px",
+                borderRadius: 8,
+                boxShadow: mode === "dark"
+                  ? "0 8px 32px rgba(124, 58, 237, 0.3)"
+                  : "0 8px 24px rgba(0, 0, 0, 0.2)",
+              },
+            },
+          },
+          MuiChip: {
+            styleOverrides: {
+              root: {
+                fontWeight: 500,
+              },
+              filled: {
+                backgroundColor: mode === "dark" ? "rgba(124, 58, 237, 0.2)" : undefined,
+              },
+            },
+          },
+          MuiSkeleton: {
+            styleOverrides: {
+              root: {
+                backgroundColor: mode === "dark"
+                  ? "rgba(124, 58, 237, 0.1)"
+                  : "rgba(0, 0, 0, 0.08)",
+              },
+              wave: {
+                "&::after": {
+                  background: mode === "dark"
+                    ? "linear-gradient(90deg, transparent, rgba(124, 58, 237, 0.2), transparent)"
+                    : undefined,
+                },
+              },
+            },
+          },
+          MuiAlert: {
+            styleOverrides: {
+              root: {
+                borderRadius: 12,
               },
             },
           },
@@ -161,7 +237,6 @@ export const ThemeProvider = ({ children }) => {
                 mode === "dark" ? "#0B1020 !important" : "#F0F4FF",
               color: mode === "dark" ? "#ffffff" : "#1F2937",
             },
-            // Fallback: If a text is still dark, this catches it
             ".MuiTypography-root": {
               color: mode === "dark" ? "#ffffff" : undefined,
             },
