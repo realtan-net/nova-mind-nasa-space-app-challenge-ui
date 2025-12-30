@@ -64,7 +64,7 @@ const Navbar = () => {
         width: 280,
         background:
           mode === "dark"
-            ? "linear-gradient(135deg, #1e293b 0%, #0f172a 100%)"
+            ? "linear-gradient(135deg, #0B1020 0%, #111827 100%)"
             : "linear-gradient(135deg, #F0F4FF 0%, #E0EBFF 100%)",
         height: "100%",
         display: "flex",
@@ -90,7 +90,7 @@ const Navbar = () => {
             fontWeight={900}
             sx={{ color: mode === "dark" ? "white" : "#1F2937" }}
           >
-            Nova Mind
+            Aether Link
           </Typography>
         </Box>
         <IconButton
@@ -212,13 +212,13 @@ const Navbar = () => {
         sx={{
           background:
             mode === "dark"
-              ? "linear-gradient(135deg, #667eea 0%, #764ba2 100%)"
+              ? "linear-gradient(135deg, #0B1020 0%, #7C3AED 50%, #00E0FF 100%)"
               : "linear-gradient(135deg, #00E0FF 0%, #3B82F6 50%, #7C3AED 100%)",
           backdropFilter: "blur(20px)",
           boxShadow:
             mode === "light"
               ? "0 4px 30px rgba(0, 224, 255, 0.2)"
-              : "0 4px 30px rgba(0, 0, 0, 0.3)",
+              : "0 4px 30px rgba(124, 58, 237, 0.3)",
           zIndex: (theme) => theme.zIndex.drawer + 1,
         }}
       >
@@ -269,7 +269,7 @@ const Navbar = () => {
                   display: { xs: "none", sm: "block" },
                 }}
               >
-                Nova Mind
+                Aether Link
               </Typography>
             </Box>
 
