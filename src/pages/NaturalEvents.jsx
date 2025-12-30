@@ -124,7 +124,7 @@ const NaturalEvents = () => {
   const createCustomIcon = (categoryId, magnitude) => {
     const color = getCategoryColor(categoryId);
     const size = magnitude ? Math.min(40, Math.max(20, magnitude / 10)) : 25;
-    
+
     return L.divIcon({
       className: 'custom-div-icon',
       html: `<div style="background-color: ${color}; width: ${size}px; height: ${size}px; border-radius: 50%; border: 3px solid white; box-shadow: 0 2px 8px rgba(0,0,0,0.3);"></div>`,
@@ -141,7 +141,7 @@ const NaturalEvents = () => {
     const totalEvents = events.length;
     const activeEvents = events.filter(e => !e.isStaleData).length;
     const staleEvents = events.filter(e => e.isStaleData).length;
-    
+
     // Get category distribution
     const categoryCount = {};
     events.forEach(event => {
@@ -155,25 +155,25 @@ const NaturalEvents = () => {
         title: 'Total Events',
         value: totalEvents,
         icon: <PublicIcon />,
-        color: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+        color: 'linear-gradient(135deg, #7C3AED 0%, #0B1020 100%)',
       },
       {
         title: 'Active Events',
         value: activeEvents,
         icon: <CheckCircleIcon />,
-        color: 'linear-gradient(135deg, #f093fb 0%, #f5576c 100%)',
+        color: 'linear-gradient(135deg, #DC2626 0%, #7C3AED 100%)',
       },
       {
         title: 'Stale Data',
         value: staleEvents,
         icon: <WarningIcon />,
-        color: 'linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)',
+        color: 'linear-gradient(135deg, #00E0FF 0%, #7C3AED 100%)',
       },
       {
         title: 'Categories',
         value: Object.keys(categoryCount).length,
         icon: <CategoryIcon />,
-        color: 'linear-gradient(135deg, #fa709a 0%, #fee140 100%)',
+        color: 'linear-gradient(135deg, #3B82F6 0%, #00E0FF 100%)',
       },
     ];
 
@@ -186,6 +186,12 @@ const NaturalEvents = () => {
                 background: card.color,
                 color: 'white',
                 height: '100%',
+                boxShadow: '0 8px 32px rgba(124, 58, 237, 0.3)',
+                transition: 'all 0.3s ease',
+                '&:hover': {
+                  transform: 'translateY(-4px)',
+                  boxShadow: '0 12px 40px rgba(124, 58, 237, 0.4)',
+                },
               }}
             >
               <CardContent>
@@ -302,20 +308,20 @@ const NaturalEvents = () => {
           scrollWheelZoom={true}
         >
           <TileLayer
-            attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+            attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>'
+            url="https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png"
           />
-          
+
           {events.map((event) => {
             // Handle events with geometry array (storms with tracks)
             if (event.geometry && event.geometry.length > 0) {
               const latestPosition = event.geometry[event.geometry.length - 1];
               const coords = latestPosition.coordinates;
-              
+
               // Draw track for storms
               if (event.geometry.length > 1) {
                 const trackPoints = event.geometry.map(g => [g.coordinates.latitude, g.coordinates.longitude]);
-                
+
                 return (
                   <div key={event.id}>
                     <Polyline
@@ -348,7 +354,7 @@ const NaturalEvents = () => {
                   </div>
                 );
               }
-              
+
               // Single point event
               return (
                 <Marker
@@ -375,7 +381,7 @@ const NaturalEvents = () => {
                 </Marker>
               );
             }
-            
+
             // Handle events with single location (wildfires)
             if (event.location) {
               return (
@@ -404,7 +410,7 @@ const NaturalEvents = () => {
                 </Marker>
               );
             }
-            
+
             return null;
           })}
         </MapContainer>
