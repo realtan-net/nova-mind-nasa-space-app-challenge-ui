@@ -16,6 +16,11 @@ body {
   min-height: 100vh;
 }
 
+/* Cosmic dark mode body styles */
+body.dark-mode {
+  background: linear-gradient(135deg, #0B1020 0%, #111827 50%, #0B1020 100%);
+}
+
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
@@ -40,7 +45,7 @@ code {
   transition: background-color 0.2s ease-in-out;
 }
 
-/* Scrollbar styling for dark mode */
+/* Scrollbar styling - cosmic theme */
 ::-webkit-scrollbar {
   width: 10px;
   height: 10px;
@@ -51,12 +56,12 @@ code {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: rgba(255, 255, 255, 0.2);
+  background: linear-gradient(135deg, rgba(124, 58, 237, 0.4) 0%, rgba(0, 224, 255, 0.4) 100%);
   border-radius: 5px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(255, 255, 255, 0.3);
+  background: linear-gradient(135deg, rgba(124, 58, 237, 0.6) 0%, rgba(0, 224, 255, 0.6) 100%);
 }
 
 /* Loading animation */
@@ -80,3 +85,9 @@ code {
 .fade-in {
   animation: fadeIn 0.3s ease-in-out;
 }
+
+/* Cosmic glow effect for special elements */
+.cosmic-glow {
+  box-shadow: 0 0 20px rgba(124, 58, 237, 0.3), 0 0 40px rgba(0, 224, 255, 0.2);
+}
+

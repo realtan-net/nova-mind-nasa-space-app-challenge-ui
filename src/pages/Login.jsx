@@ -142,7 +142,7 @@ const Login = () => {
 
         <Box sx={{ mt: 3, textAlign: "center" }}>
           <Typography variant="body2" color="text.secondary">
-            New to Nova Mind?{" "}
+            New to Aether Link?{" "}
             <MuiLink
               component={Link}
               to="/register"
