@@ -11,9 +11,11 @@ import {
   Skeleton,
   useTheme,
 } from '@mui/material';
+import { motion } from 'framer-motion';
 import { FaDownload, FaExpand, FaCompress } from 'react-icons/fa';
+import toast from 'react-hot-toast';
 import { apodAPI } from '../../api/apod';
-import { formatFullDate } from '../../utils/dateFormatter';
+import { formatRelativeTime, formatSmartDate } from '../../utils/dayjs';
 import ErrorMessage from '../common/ErrorMessage';
 
 const APODCard = ({ featured = false }) => {
@@ -34,8 +36,10 @@ const APODCard = ({ featured = false }) => {
     try {
       const response = await apodAPI.getToday();
       setApod(response.data);
+      toast.success('Astronomy Picture loaded!', { duration: 2000 });
     } catch (err) {
       setError(err.message || 'Failed to load Astronomy Picture of the Day');
+      toast.error('Failed to load APOD');
       console.error('APOD fetch error:', err);
     } finally {
       setLoading(false);
@@ -135,7 +139,7 @@ const APODCard = ({ featured = false }) => {
         </Typography>
 
         <Typography variant="body2" color="text.secondary" sx={{ mb: 2 }}>
-          {formatFullDate(apod.date)}
+          {formatSmartDate(apod.date)}
         </Typography>
 
         {apod.copyright && (

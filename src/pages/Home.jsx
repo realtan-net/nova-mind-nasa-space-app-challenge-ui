@@ -13,6 +13,9 @@ import {
   Skeleton,
 } from "@mui/material";
 import { useNavigate } from "react-router-dom";
+import { motion } from "framer-motion";
+import CountUp from "react-countup";
+import { useInView } from "react-intersection-observer";
 import APODCard from "../components/dashboard/APODCard";
 import EventsAlert from "../components/dashboard/EventsAlert";
 import { useAsteroidFeed } from "../hooks/useAsteroidData";
@@ -35,6 +38,12 @@ const Home = () => {
   const theme = useTheme();
   const isDark = theme.palette.mode === "dark";
   const navigate = useNavigate();
+
+  // Intersection observer for hero section animations
+  const [heroRef, heroInView] = useInView({
+    triggerOnce: true,
+    threshold: 0.2,
+  });
 
   // Fetch asteroid data (today to tomorrow)
   const startDate = formatAPIDateStandard(getCurrentDate());
@@ -147,12 +156,25 @@ const Home = () => {
             Aether Link
           </Typography>
           <Typography
-            variant="h6"
+            variant="h5"
             sx={{
-              color: "rgba(255, 255, 255, 0.9)",
+              color: "rgba(255, 255, 255, 0.95)",
+              fontWeight: 300,
+              fontStyle: "italic",
+              letterSpacing: "0.02em",
+              mb: 2,
+            }}
+          >
+            A unified lens for Earth and Space data.
+          </Typography>
+          <Typography
+            variant="subtitle1"
+            sx={{
+              color: "rgba(255, 255, 255, 0.85)",
               fontWeight: 500,
-              letterSpacing: "0.05em",
+              letterSpacing: "0.1em",
               textTransform: "uppercase",
+              fontSize: "0.875rem",
             }}
           >
             Live Environmental & Space Data Platform
@@ -171,87 +193,106 @@ const Home = () => {
           </Typography>
 
           {/* Animated Stat Cards */}
-          <Grid container spacing={2} sx={{ mt: 4, maxWidth: 800, mx: "auto" }}>
+          <Grid container spacing={2} sx={{ mt: 4, maxWidth: 800, mx: "auto" }} ref={heroRef}>
             <Grid item xs={6} sm={3}>
-              <Box
-                sx={{
-                  background: "rgba(255, 255, 255, 0.1)",
-                  backdropFilter: "blur(10px)",
-                  borderRadius: 2,
-                  p: 2,
-                  textAlign: "center",
-                  border: "1px solid rgba(255, 255, 255, 0.2)",
-                  animation: "pulse 2s ease-in-out infinite",
-                  "@keyframes pulse": {
-                    "0%, 100%": { opacity: 1 },
-                    "50%": { opacity: 0.8 },
-                  },
-                }}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={heroInView ? { opacity: 1, y: 0 } : {}}
+                transition={{ duration: 0.5, delay: 0.1 }}
               >
-                <Typography variant="h4" fontWeight={700} sx={{ color: "white" }}>
-                  6+
-                </Typography>
-                <Typography variant="caption" sx={{ color: "rgba(255,255,255,0.8)" }}>
-                  NASA APIs
-                </Typography>
-              </Box>
+                <Box
+                  sx={{
+                    background: "rgba(255, 255, 255, 0.1)",
+                    backdropFilter: "blur(10px)",
+                    borderRadius: 2,
+                    p: 2,
+                    textAlign: "center",
+                    border: "1px solid rgba(255, 255, 255, 0.2)",
+                  }}
+                >
+                  <Typography variant="h4" fontWeight={700} sx={{ color: "white" }}>
+                    {heroInView ? <CountUp end={6} duration={2} suffix="+" /> : "0"}
+                  </Typography>
+                  <Typography variant="caption" sx={{ color: "rgba(255,255,255,0.8)" }}>
+                    NASA APIs
+                  </Typography>
+                </Box>
+              </motion.div>
             </Grid>
             <Grid item xs={6} sm={3}>
-              <Box
-                sx={{
-                  background: "rgba(255, 255, 255, 0.1)",
-                  backdropFilter: "blur(10px)",
-                  borderRadius: 2,
-                  p: 2,
-                  textAlign: "center",
-                  border: "1px solid rgba(255, 255, 255, 0.2)",
-                }}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={heroInView ? { opacity: 1, y: 0 } : {}}
+                transition={{ duration: 0.5, delay: 0.2 }}
               >
-                <Typography variant="h4" fontWeight={700} sx={{ color: "white" }}>
-                  24/7
-                </Typography>
-                <Typography variant="caption" sx={{ color: "rgba(255,255,255,0.8)" }}>
-                  Live Data
-                </Typography>
-              </Box>
+                <Box
+                  sx={{
+                    background: "rgba(255, 255, 255, 0.1)",
+                    backdropFilter: "blur(10px)",
+                    borderRadius: 2,
+                    p: 2,
+                    textAlign: "center",
+                    border: "1px solid rgba(255, 255, 255, 0.2)",
+                  }}
+                >
+                  <Typography variant="h4" fontWeight={700} sx={{ color: "white" }}>
+                    {heroInView ? <CountUp end={24} duration={2} suffix="/7" /> : "0"}
+                  </Typography>
+                  <Typography variant="caption" sx={{ color: "rgba(255,255,255,0.8)" }}>
+                    Live Data
+                  </Typography>
+                </Box>
+              </motion.div>
             </Grid>
             <Grid item xs={6} sm={3}>
-              <Box
-                sx={{
-                  background: "rgba(255, 255, 255, 0.1)",
-                  backdropFilter: "blur(10px)",
-                  borderRadius: 2,
-                  p: 2,
-                  textAlign: "center",
-                  border: "1px solid rgba(255, 255, 255, 0.2)",
-                }}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={heroInView ? { opacity: 1, y: 0 } : {}}
+                transition={{ duration: 0.5, delay: 0.3 }}
               >
-                <Typography variant="h4" fontWeight={700} sx={{ color: "white" }}>
-                  🌍
-                </Typography>
-                <Typography variant="caption" sx={{ color: "rgba(255,255,255,0.8)" }}>
-                  Global Coverage
-                </Typography>
-              </Box>
+                <Box
+                  sx={{
+                    background: "rgba(255, 255, 255, 0.1)",
+                    backdropFilter: "blur(10px)",
+                    borderRadius: 2,
+                    p: 2,
+                    textAlign: "center",
+                    border: "1px solid rgba(255, 255, 255, 0.2)",
+                  }}
+                >
+                  <Typography variant="h4" fontWeight={700} sx={{ color: "white" }}>
+                    🌍
+                  </Typography>
+                  <Typography variant="caption" sx={{ color: "rgba(255,255,255,0.8)" }}>
+                    Global Coverage
+                  </Typography>
+                </Box>
+              </motion.div>
             </Grid>
             <Grid item xs={6} sm={3}>
-              <Box
-                sx={{
-                  background: "rgba(255, 255, 255, 0.1)",
-                  backdropFilter: "blur(10px)",
-                  borderRadius: 2,
-                  p: 2,
-                  textAlign: "center",
-                  border: "1px solid rgba(255, 255, 255, 0.2)",
-                }}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={heroInView ? { opacity: 1, y: 0 } : {}}
+                transition={{ duration: 0.5, delay: 0.4 }}
               >
-                <Typography variant="h4" fontWeight={700} sx={{ color: "white" }}>
-                  🚀
-                </Typography>
-                <Typography variant="caption" sx={{ color: "rgba(255,255,255,0.8)" }}>
-                  Space Ready
-                </Typography>
-              </Box>
+                <Box
+                  sx={{
+                    background: "rgba(255, 255, 255, 0.1)",
+                    backdropFilter: "blur(10px)",
+                    borderRadius: 2,
+                    p: 2,
+                    textAlign: "center",
+                    border: "1px solid rgba(255, 255, 255, 0.2)",
+                  }}
+                >
+                  <Typography variant="h4" fontWeight={700} sx={{ color: "white" }}>
+                    🚀
+                  </Typography>
+                  <Typography variant="caption" sx={{ color: "rgba(255,255,255,0.8)" }}>
+                    Space Ready
+                  </Typography>
+                </Box>
+              </motion.div>
             </Grid>
           </Grid>
         </Box>

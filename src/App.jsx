@@ -1,8 +1,9 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Box } from "@mui/material";
+import { Toaster } from "react-hot-toast";
 import { ThemeProvider } from "./context/ThemeContext";
 import { LocationProvider } from "./context/LocationContext";
-import { AuthProvider } from "./context/AuthContext"; // 1. Import the AuthProvider
+import { AuthProvider } from "./context/AuthContext";
 
 import Navbar from "./components/common/Navbar";
 import Footer from "./components/common/Footer";
@@ -14,7 +15,6 @@ import NaturalEvents from "./pages/NaturalEvents";
 import AirQuality from "./pages/AirQuality";
 import APOD from "./pages/APOD";
 
-// 2. Import your new Auth pages
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Profile from "./pages/Profile";
@@ -25,9 +25,31 @@ function App() {
   return (
     <ThemeProvider>
       <LocationProvider>
-        {/* 3. Wrap application with AuthProvider */}
         <AuthProvider>
           <BrowserRouter>
+            {/* Global Toast Notifications */}
+            <Toaster
+              position="top-right"
+              toastOptions={{
+                duration: 4000,
+                style: {
+                  background: '#111827',
+                  color: '#fff',
+                  border: '1px solid rgba(124, 58, 237, 0.3)',
+                  borderRadius: '12px',
+                  boxShadow: '0 8px 32px rgba(124, 58, 237, 0.2)',
+                },
+                success: {
+                  iconTheme: { primary: '#10B981', secondary: '#fff' },
+                },
+                error: {
+                  iconTheme: { primary: '#EF4444', secondary: '#fff' },
+                },
+                loading: {
+                  iconTheme: { primary: '#7C3AED', secondary: '#fff' },
+                },
+              }}
+            />
             <Box
               sx={{
                 display: "flex",
@@ -45,9 +67,7 @@ function App() {
                   <Route path="/events" element={<NaturalEvents />} />
                   <Route path="/air-quality" element={<AirQuality />} />
                   <Route path="/apod" element={<APOD />} />
-                    {/* Add the NotFound Route */}
                   <Route path="*" element={<NotFound />} />
-                  {/* 4. Add the Authentication Routes */}
                   <Route path="/login" element={<Login />} />
                   <Route path="/register" element={<Register />} />
                   <Route path="/profile" element={<Profile />} />
@@ -63,3 +83,4 @@ function App() {
 }
 
 export default App;
+
