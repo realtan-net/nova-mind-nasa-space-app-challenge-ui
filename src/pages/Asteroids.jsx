@@ -1,6 +1,6 @@
-import { 
-  Container, Typography, Box, Paper, Grid, Card, CardContent, Chip, 
-  TextField, Alert, Accordion, AccordionSummary, AccordionDetails, 
+import {
+  Container, Typography, Box, Paper, Grid, Card, CardContent, Chip,
+  TextField, Alert, Accordion, AccordionSummary, AccordionDetails,
   Link, Table, TableBody, TableCell, TableContainer, TableHead, TableRow,
   LinearProgress, Divider, Avatar
 } from '@mui/material';
@@ -12,8 +12,8 @@ import { formatAPIDateStandard, getDateDaysAgo, getCurrentDate, formatDisplayDat
 import { format, parseISO } from 'date-fns';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { FaRocket, FaExclamationTriangle, FaMeteor, FaRuler, FaTachometerAlt } from 'react-icons/fa';
-import { 
-  ScatterChart, Scatter, XAxis, YAxis, CartesianGrid, 
+import {
+  ScatterChart, Scatter, XAxis, YAxis, CartesianGrid,
   Tooltip, Legend, ResponsiveContainer, Cell, BarChart, Bar,
   PieChart, Pie
 } from 'recharts';
@@ -66,7 +66,13 @@ const Asteroids = () => {
     return (
       <Grid container spacing={2} sx={{ mb: 3 }}>
         <Grid item xs={12} sm={6} md={3}>
-          <Card sx={{ height: '100%', background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)' }}>
+          <Card sx={{
+            height: '100%',
+            background: 'linear-gradient(135deg, #7C3AED 0%, #0B1020 100%)',
+            boxShadow: '0 8px 32px rgba(124, 58, 237, 0.3)',
+            transition: 'all 0.3s ease',
+            '&:hover': { transform: 'translateY(-4px)', boxShadow: '0 12px 40px rgba(124, 58, 237, 0.4)' }
+          }}>
             <CardContent>
               <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, mb: 1 }}>
                 <FaMeteor color="white" size={24} />
@@ -85,7 +91,13 @@ const Asteroids = () => {
         </Grid>
 
         <Grid item xs={12} sm={6} md={3}>
-          <Card sx={{ height: '100%', background: 'linear-gradient(135deg, #f093fb 0%, #f5576c 100%)' }}>
+          <Card sx={{
+            height: '100%',
+            background: 'linear-gradient(135deg, #DC2626 0%, #7C3AED 100%)',
+            boxShadow: '0 8px 32px rgba(220, 38, 38, 0.3)',
+            transition: 'all 0.3s ease',
+            '&:hover': { transform: 'translateY(-4px)', boxShadow: '0 12px 40px rgba(220, 38, 38, 0.4)' }
+          }}>
             <CardContent>
               <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, mb: 1 }}>
                 <FaExclamationTriangle color="white" size={24} />
@@ -104,7 +116,13 @@ const Asteroids = () => {
         </Grid>
 
         <Grid item xs={12} sm={6} md={3}>
-          <Card sx={{ height: '100%', background: 'linear-gradient(135deg, #fa709a 0%, #fee140 100%)' }}>
+          <Card sx={{
+            height: '100%',
+            background: 'linear-gradient(135deg, #00E0FF 0%, #7C3AED 100%)',
+            boxShadow: '0 8px 32px rgba(0, 224, 255, 0.3)',
+            transition: 'all 0.3s ease',
+            '&:hover': { transform: 'translateY(-4px)', boxShadow: '0 12px 40px rgba(0, 224, 255, 0.4)' }
+          }}>
             <CardContent>
               <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, mb: 1 }}>
                 <FaRocket color="white" size={24} />
@@ -123,7 +141,13 @@ const Asteroids = () => {
         </Grid>
 
         <Grid item xs={12} sm={6} md={3}>
-          <Card sx={{ height: '100%', background: 'linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)' }}>
+          <Card sx={{
+            height: '100%',
+            background: 'linear-gradient(135deg, #3B82F6 0%, #00E0FF 100%)',
+            boxShadow: '0 8px 32px rgba(59, 130, 246, 0.3)',
+            transition: 'all 0.3s ease',
+            '&:hover': { transform: 'translateY(-4px)', boxShadow: '0 12px 40px rgba(59, 130, 246, 0.4)' }
+          }}>
             <CardContent>
               <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, mb: 1 }}>
                 <FaTachometerAlt color="white" size={24} />
@@ -182,20 +206,20 @@ const Asteroids = () => {
             <ResponsiveContainer width="100%" height={300}>
               <ScatterChart>
                 <CartesianGrid strokeDasharray="3 3" />
-                <XAxis 
-                  dataKey="distance" 
-                  name="Distance (km)" 
-                  scale="log" 
+                <XAxis
+                  dataKey="distance"
+                  name="Distance (km)"
+                  scale="log"
                   domain={['auto', 'auto']}
                   tickFormatter={(value) => `${(value / 1000000).toFixed(1)}M`}
                 />
-                <YAxis 
-                  dataKey="diameter" 
-                  name="Diameter (km)" 
-                  scale="log" 
+                <YAxis
+                  dataKey="diameter"
+                  name="Diameter (km)"
+                  scale="log"
                   domain={['auto', 'auto']}
                 />
-                <Tooltip 
+                <Tooltip
                   cursor={{ strokeDasharray: '3 3' }}
                   content={({ active, payload }) => {
                     if (active && payload && payload.length) {
@@ -212,13 +236,13 @@ const Asteroids = () => {
                           <Typography variant="caption" display="block">
                             Velocity: {formatVelocity(data.velocity)}
                           </Typography>
-                          <Chip 
-                            label={data.isHazardous ? 'Hazardous' : 'Safe'} 
-                            size="small" 
-                            sx={{ 
+                          <Chip
+                            label={data.isHazardous ? 'Hazardous' : 'Safe'}
+                            size="small"
+                            sx={{
                               mt: 0.5,
-                              bgcolor: data.isHazardous ? '#f44336' : '#4caf50', 
-                              color: 'white' 
+                              bgcolor: data.isHazardous ? '#f44336' : '#4caf50',
+                              color: 'white'
                             }}
                           />
                         </Paper>
@@ -290,24 +314,24 @@ const Asteroids = () => {
     );
   };
 
-const processedAsteroids = asteroids?.data?.asteroidsByDate
+  const processedAsteroids = asteroids?.data?.asteroidsByDate
     ? Object.entries(asteroids.data.asteroidsByDate).reduce((acc, [date, dayAsteroids]) => {
-        let results = dayAsteroids.filter(asteroid =>
-            asteroid.name.toLowerCase().includes(searchTerm.toLowerCase())
-        );
+      let results = dayAsteroids.filter(asteroid =>
+        asteroid.name.toLowerCase().includes(searchTerm.toLowerCase())
+      );
 
-        if (sortBy === 'name') {
-            results.sort((a, b) => a.name.localeCompare(b.name));
-        } else if (sortBy === 'size') {
-            results.sort((a, b) => b.estimatedDiameter.kilometers.max - a.estimatedDiameter.kilometers.max);
-        } else if (sortBy === 'velocity') {
-            results.sort((a, b) => b.closeApproachData.relativeVelocity.kilometersPerHour - a.closeApproachData.relativeVelocity.kilometersPerHour);
-        }
+      if (sortBy === 'name') {
+        results.sort((a, b) => a.name.localeCompare(b.name));
+      } else if (sortBy === 'size') {
+        results.sort((a, b) => b.estimatedDiameter.kilometers.max - a.estimatedDiameter.kilometers.max);
+      } else if (sortBy === 'velocity') {
+        results.sort((a, b) => b.closeApproachData.relativeVelocity.kilometersPerHour - a.closeApproachData.relativeVelocity.kilometersPerHour);
+      }
 
-        if (results.length > 0) {
-            acc[date] = results;
-        }
-        return acc;
+      if (results.length > 0) {
+        acc[date] = results;
+      }
+      return acc;
     }, {})
     : {};
 
@@ -321,7 +345,7 @@ const processedAsteroids = asteroids?.data?.asteroidsByDate
           Asteroid Details ({asteroids.data.elementCount} objects)
         </Typography>
 
-          {Object.entries(processedAsteroids).map(([date, dayAsteroids]) => (
+        {Object.entries(processedAsteroids).map(([date, dayAsteroids]) => (
           <Box key={date} sx={{ mb: 3 }}>
             <Typography variant="subtitle1" fontWeight={600} sx={{ mb: 1, color: 'primary.main' }}>
               📅 {format(parseISO(date), 'MMMM dd, yyyy')} ({dayAsteroids.length} asteroids)
@@ -334,7 +358,7 @@ const processedAsteroids = asteroids?.data?.asteroidsByDate
                     <Avatar sx={{ bgcolor: getSizeColor(asteroid.estimatedDiameter.kilometers.max) }}>
                       <FaMeteor />
                     </Avatar>
-                    
+
                     <Box sx={{ flexGrow: 1, minWidth: 200 }}>
                       <Typography variant="subtitle1" fontWeight={600}>
                         {asteroid.name}
@@ -344,10 +368,10 @@ const processedAsteroids = asteroids?.data?.asteroidsByDate
                       </Typography>
                     </Box>
 
-                    <Chip 
+                    <Chip
                       label={asteroid.isPotentiallyHazardous ? '⚠️ Hazardous' : '✓ Safe'}
                       size="small"
-                      sx={{ 
+                      sx={{
                         bgcolor: getHazardColor(asteroid.isPotentiallyHazardous),
                         color: 'white',
                         fontWeight: 600
@@ -355,7 +379,7 @@ const processedAsteroids = asteroids?.data?.asteroidsByDate
                     />
 
                     {asteroid.isSentryObject && (
-                      <Chip 
+                      <Chip
                         label="🎯 Sentry Object"
                         size="small"
                         color="error"
@@ -363,7 +387,7 @@ const processedAsteroids = asteroids?.data?.asteroidsByDate
                       />
                     )}
 
-                    <Chip 
+                    <Chip
                       label={formatDistance(asteroid.closeApproachData.missDistance.kilometers)}
                       size="small"
                       variant="outlined"
@@ -408,12 +432,12 @@ const processedAsteroids = asteroids?.data?.asteroidsByDate
                         </Grid>
                         <Box sx={{ mt: 2 }}>
                           <Typography variant="caption" color="text.secondary">Relative Size</Typography>
-                          <LinearProgress 
-                            variant="determinate" 
-                            value={Math.min((asteroid.estimatedDiameter.kilometers.max / 1) * 100, 100)} 
-                            sx={{ 
-                              height: 8, 
-                              borderRadius: 1, 
+                          <LinearProgress
+                            variant="determinate"
+                            value={Math.min((asteroid.estimatedDiameter.kilometers.max / 1) * 100, 100)}
+                            sx={{
+                              height: 8,
+                              borderRadius: 1,
                               mt: 0.5,
                               bgcolor: 'grey.300',
                               '& .MuiLinearProgress-bar': {
@@ -518,8 +542,8 @@ const processedAsteroids = asteroids?.data?.asteroidsByDate
       {/* Info Alert */}
       <Alert severity="info" sx={{ mb: 3 }}>
         <Typography variant="body2">
-          <strong>About NEOs:</strong> Near-Earth Objects are asteroids and comets with orbits that bring them within 
-          30 million miles (50 million kilometers) of Earth's orbit. Those larger than ~140 meters that come within 
+          <strong>About NEOs:</strong> Near-Earth Objects are asteroids and comets with orbits that bring them within
+          30 million miles (50 million kilometers) of Earth's orbit. Those larger than ~140 meters that come within
           4.6 million miles (7.5 million km) are classified as Potentially Hazardous Asteroids (PHAs).
         </Typography>
       </Alert>
@@ -548,32 +572,32 @@ const processedAsteroids = asteroids?.data?.asteroidsByDate
             />
           </Grid>
           <Grid item xs={12}>
-              <TextField
-                  fullWidth
-                  label="Asteroid İsmine Göre Filtrele"
-                  variant="outlined"
-                  size="small"
-                  value={searchTerm}
-                  onChange={(e) => setSearchTerm(e.target.value)}
-                  placeholder="Örn: (2024 BX)..."
-              />
+            <TextField
+              fullWidth
+              label="Asteroid İsmine Göre Filtrele"
+              variant="outlined"
+              size="small"
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+              placeholder="Örn: (2024 BX)..."
+            />
           </Grid>
-            <Grid item xs={12} sm={4}>
-                <TextField
-                    select
-                    fullWidth
-                    label="Sırala"
-                    size="small"
-                    value={sortBy}
-                    onChange={(e) => setSortBy(e.target.value)}
-                    SelectProps={{ native: true }}
-                >
-                    <option value="none">Varsayılan</option>
-                    <option value="name">İsim (A-Z)</option>
-                    <option value="size">Büyüklük (Azalan)</option>
-                    <option value="velocity">Hız (Azalan)</option>
-                </TextField>
-            </Grid>
+          <Grid item xs={12} sm={4}>
+            <TextField
+              select
+              fullWidth
+              label="Sırala"
+              size="small"
+              value={sortBy}
+              onChange={(e) => setSortBy(e.target.value)}
+              SelectProps={{ native: true }}
+            >
+              <option value="none">Varsayılan</option>
+              <option value="name">İsim (A-Z)</option>
+              <option value="size">Büyüklük (Azalan)</option>
+              <option value="velocity">Hız (Azalan)</option>
+            </TextField>
+          </Grid>
           <Grid item xs={12} sm={2}>
             <Typography variant="caption" color="text.secondary">
               {asteroids?.data?.elementCount || 0} asteroids

@@ -18,10 +18,11 @@ import {
   getCurrentDate,
   getDateDaysAgo,
 } from "../utils/dateFormatter";
-import { FaCloudSun, FaGlobeAmericas, FaMeteor } from "react-icons/fa";
+import { FaCloudSun, FaGlobeAmericas, FaMeteor, FaSatellite } from "react-icons/fa";
 
 const Home = () => {
   const theme = useTheme(); // Access the theme to check if we are in dark mode
+  const isDark = theme.palette.mode === "dark";
 
   // Fetch asteroid data (today to tomorrow)
   const startDate = formatAPIDateStandard(getCurrentDate());
@@ -63,6 +64,102 @@ const Home = () => {
 
   return (
     <Container maxWidth="xl" sx={{ py: 4 }}>
+      {/* Hero Section */}
+      <Box
+        sx={{
+          mb: 6,
+          py: 6,
+          px: 4,
+          borderRadius: 4,
+          background: isDark
+            ? "linear-gradient(135deg, #0B1020 0%, #1a1a3e 50%, #7C3AED 100%)"
+            : "linear-gradient(135deg, #667eea 0%, #764ba2 50%, #00E0FF 100%)",
+          position: "relative",
+          overflow: "hidden",
+          boxShadow: isDark
+            ? "0 20px 60px rgba(124, 58, 237, 0.3)"
+            : "0 20px 60px rgba(102, 126, 234, 0.4)",
+        }}
+      >
+        {/* Decorative elements */}
+        <Box
+          sx={{
+            position: "absolute",
+            top: -50,
+            right: -50,
+            width: 200,
+            height: 200,
+            borderRadius: "50%",
+            background: "rgba(255, 255, 255, 0.1)",
+            filter: "blur(40px)",
+          }}
+        />
+        <Box
+          sx={{
+            position: "absolute",
+            bottom: -30,
+            left: "30%",
+            width: 150,
+            height: 150,
+            borderRadius: "50%",
+            background: "rgba(0, 224, 255, 0.2)",
+            filter: "blur(50px)",
+          }}
+        />
+
+        <Box sx={{ position: "relative", zIndex: 1, textAlign: "center" }}>
+          <Box sx={{ display: "flex", justifyContent: "center", mb: 2 }}>
+            <Avatar
+              sx={{
+                width: 80,
+                height: 80,
+                background: "rgba(255, 255, 255, 0.2)",
+                backdropFilter: "blur(10px)",
+                border: "2px solid rgba(255, 255, 255, 0.3)",
+                boxShadow: "0 8px 32px rgba(0, 0, 0, 0.2)",
+              }}
+            >
+              <FaSatellite size={40} color="white" />
+            </Avatar>
+          </Box>
+          <Typography
+            variant="h2"
+            fontWeight={900}
+            sx={{
+              color: "white",
+              textShadow: "0 4px 20px rgba(0, 0, 0, 0.3)",
+              letterSpacing: "-0.02em",
+              mb: 1,
+            }}
+          >
+            Aether Link
+          </Typography>
+          <Typography
+            variant="h6"
+            sx={{
+              color: "rgba(255, 255, 255, 0.9)",
+              fontWeight: 500,
+              letterSpacing: "0.05em",
+              textTransform: "uppercase",
+            }}
+          >
+            Connecting Earth, Space, and Data
+          </Typography>
+          <Typography
+            variant="body1"
+            sx={{
+              color: "rgba(255, 255, 255, 0.7)",
+              mt: 2,
+              maxWidth: 600,
+              mx: "auto",
+            }}
+          >
+            Your mission control for environmental monitoring, space weather tracking,
+            and real-time celestial data powered by NASA APIs.
+          </Typography>
+        </Box>
+      </Box>
+
       {/* Feature Highlights */}
       <Grid container spacing={4} sx={{ mb: 6 }}>
         <Grid item xs={12}>
@@ -72,8 +169,6 @@ const Home = () => {
             fontWeight={800}
             sx={{
               mb: 3,
-              // FIX 1: Removed hardcoded color '#1F2937'.
-              // Now it uses the Theme Default (White in Dark Mode, Gray in Light Mode)
               color: "text.primary",
               letterSpacing: "-0.01em",
             }}
@@ -86,22 +181,23 @@ const Home = () => {
           <Card
             sx={{
               height: "100%",
-              // FIX 2: Dynamic Background (Dark in Dark Mode, Glass/White in Light Mode)
-              background:
-                theme.palette.mode === "dark"
-                  ? "rgba(30, 41, 59, 0.6)" // Dark translucent
-                  : "rgba(255, 255, 255, 0.8)", // Light translucent
+              background: isDark
+                ? "linear-gradient(135deg, rgba(124, 58, 237, 0.15) 0%, rgba(17, 24, 39, 0.9) 100%)"
+                : "rgba(255, 255, 255, 0.8)",
               backdropFilter: "blur(10px)",
               borderRadius: 3,
-              border:
-                theme.palette.mode === "dark"
-                  ? "1px solid rgba(255, 255, 255, 0.1)"
-                  : "1px solid rgba(255, 255, 255, 0.3)",
-              boxShadow: "0 8px 32px rgba(0, 224, 255, 0.15)",
+              border: isDark
+                ? "1px solid rgba(124, 58, 237, 0.3)"
+                : "1px solid rgba(255, 255, 255, 0.3)",
+              boxShadow: isDark
+                ? "0 8px 32px rgba(124, 58, 237, 0.2)"
+                : "0 8px 32px rgba(0, 224, 255, 0.15)",
               transition: "all 0.3s ease",
               "&:hover": {
                 transform: "translateY(-8px)",
-                boxShadow: "0 16px 48px rgba(59, 130, 246, 0.25)",
+                boxShadow: isDark
+                  ? "0 16px 48px rgba(124, 58, 237, 0.35)"
+                  : "0 16px 48px rgba(59, 130, 246, 0.25)",
               },
             }}
           >
