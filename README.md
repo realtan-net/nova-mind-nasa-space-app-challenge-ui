@@ -1,4 +1,4 @@
-# Nova Mind - Environmental & Space Data Platform
+# Aetherlink Project - Environmental & Space Data Platform
 
 A comprehensive web application for monitoring environmental conditions, space weather, natural events, and astronomical data.
 
